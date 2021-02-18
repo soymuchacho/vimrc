@@ -1,0 +1,131 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "resourced",
+    "description" : "This is a sample Petstore server.  You can find\nout more about Swagger at\n[http://swagger.io](http://swagger.io) or on\n[irc.freenode.net, #swagger](http://swagger.io/irc/).\n",
+    "termsOfService" : "http://swagger.io/terms/",
+    "contact" : {
+      "email" : "vespergu@tvunetworks.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version" : "v1.0.0.1"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/TVU_For_Test/resourced_test/v1.0.0.1",
+    "description" : "SwaggerHub API Auto Mocking"
+  } ],
+  "tags" : [ {
+    "name" : "export",
+    "description" : "get the first frame of the hi-res media file. export hi-res media data.",
+    "externalDocs" : {
+      "description" : "Find out more",
+      "url" : "https://showdoc.tvunetworks.com/web/#/4?page_id=29"
+    }
+  } ],
+  "paths" : {
+    "/export" : {
+      "post" : {
+        "tags" : [ "export" ],
+        "summary" : "export media for user",
+        "operationId" : "export",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Export"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "405" : {
+            "description" : "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "export" : {
+        "required" : [ "ServiceCaller", "StartPos" ],
+        "type" : "object",
+        "properties" : {
+          "ServiceCaller" : {
+            "type" : "string",
+            "description" : "the name of service caller. `mma` or `search`.",
+            "example" : "mma"
+          },
+          "StartPos" : {
+            "type" : "integer",
+            "description" : "in millisecond. Get from Search API.",
+            "format" : "int64",
+            "example" : 16817283212
+          },
+          "StartTime" : {
+            "type" : "string",
+            "description" : "in millisecond. Relative time of mark.",
+            "example" : "00:12"
+          },
+          "Duration" : {
+            "type" : "integer",
+            "description" : "in millisecond",
+            "format" : "int64",
+            "example" : 1000
+          },
+          "FetchMedia" : {
+            "type" : "boolean",
+            "description" : "this field decides whether generate file or not when API is invoked. You can use `false` to get the thumbnail of the first frame. The default value is `false`",
+            "example" : false
+          }
+        },
+        "xml" : {
+          "name" : "export"
+        }
+      },
+      "ApiResponse" : {
+        "type" : "object",
+        "properties" : {
+          "ErrorCode" : {
+            "type" : "integer",
+            "format" : "int32",
+            "example" : 200
+          },
+          "ErrorMessage" : {
+            "type" : "string",
+            "example" : "ok"
+          }
+        },
+        "example" : {
+          "ErrorCode" : 200,
+          "ErrorMessage" : "ok"
+        }
+      }
+    },
+    "requestBodies" : {
+      "Export" : {
+        "description" : "Export object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/export"
+            }
+          },
+          "application/xml" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/export"
+            }
+          }
+        },
+        "required" : true
+      }
+    }
+  }
+}
