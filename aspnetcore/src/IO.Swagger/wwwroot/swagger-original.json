@@ -32,7 +32,7 @@
         "summary" : "export media for user",
         "operationId" : "export",
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/Export"
+          "$ref" : "#/components/requestBodies/ExportReq"
         },
         "responses" : {
           "200" : {
@@ -54,7 +54,7 @@
   },
   "components" : {
     "schemas" : {
-      "export" : {
+      "exportparam" : {
         "required" : [ "ServiceCaller", "StartPos" ],
         "type" : "object",
         "properties" : {
@@ -87,7 +87,7 @@
           }
         },
         "xml" : {
-          "name" : "export"
+          "name" : "exportparam"
         }
       },
       "ApiResponse" : {
@@ -110,17 +110,17 @@
       }
     },
     "requestBodies" : {
-      "Export" : {
+      "ExportReq" : {
         "description" : "Export object",
         "content" : {
           "application/json" : {
             "schema" : {
-              "$ref" : "#/components/schemas/export"
+              "$ref" : "#/components/schemas/exportparam"
             }
           },
           "application/xml" : {
             "schema" : {
-              "$ref" : "#/components/schemas/export"
+              "$ref" : "#/components/schemas/exportparam"
             }
           }
         },

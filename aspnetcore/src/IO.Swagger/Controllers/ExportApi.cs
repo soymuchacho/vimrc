@@ -38,7 +38,7 @@ namespace IO.Swagger.Controllers
         [ValidateModelState]
         [SwaggerOperation("Export")]
         [SwaggerResponse(statusCode: 200, type: typeof(ApiResponse), description: "OK")]
-        public virtual IActionResult Export([FromBody]Export body)
+        public virtual IActionResult Export([FromBody]Exportparam body)
         { 
             //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
             // return StatusCode(200, default(ApiResponse));
